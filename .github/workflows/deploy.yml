@@ -32,10 +32,10 @@ jobs:
       - name: 拉取仓库代码
         uses: actions/checkout@v4
 
-      - name: 配置 GitHub Pages（首次运行会自动开启 Pages，无需手动去 Settings）
+      - name: 配置 GitHub Pages
+        # ⚠️ 首次使用前，需要仓库所有者在 Settings → Pages → Source 选择 “GitHub Actions”
+        # （GITHUB_TOKEN 无权替你创建 Pages 站点，所以这一步没法自动化）
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       - name: 上传站点文件（整个仓库根目录就是网站内容）
         uses: actions/upload-pages-artifact@v3
