@@ -424,6 +424,8 @@ html[data-theme="dark"] .icon-btn__moon { opacity: 1; transform: none; }
   border: 1px dashed var(--brand);
 }
 .quote p { color: var(--text-2); font-size: .96rem; }
+/* 自我评价文字很短时（三个字那种），放大显示，避免在大框里显得空 */
+.quote--short p { font-size: 1.5rem; font-weight: 600; letter-spacing: .06em; color: var(--text); }
 .quote footer { margin-top: 14px; font-size: .86rem; color: var(--muted); text-align: right; }
 
 /* ---------- 12 联系我 / 页脚 ---------- */
