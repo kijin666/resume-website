@@ -35,7 +35,9 @@ git --version
 - 如果显示 `git version 2.4x.x` → 已安装，跳到 0.3；
 - 如果提示 `'git' 不是内部或外部命令` → 继续 0.2 安装。
 
-> 💡 在本机检测结果：**当前电脑还没有安装 Git**，请按下面步骤安装。
+> ✅ **本机当前状态（已由我确认）**：Git **2.55.0** 已安装完成（路径 `C:\Program Files\Git\cmd\git.exe`），
+> 提交身份也已配置好（`user.name=kijin666`、`user.email=xing_070604@qq.com`）。
+> 所以下面的 0.1~0.3 你已经可以跳过，直接从**第 1 步**开始。
 
 ### 0.2 安装 Git（Windows 推荐两种方式）
 
@@ -119,6 +121,9 @@ dir
 `dir` 应该能看到 `index.html`、`css`、`js`、`assets`、`.github`、`README.md`。**如果看不到这些文件，说明目录不对，后面全部会失败。**
 
 ### 2.2 初始化仓库并做第一次提交
+
+> ✅ 这一步**你已经完成了**（本地仓库已初始化，第一次提交为 `first commit: 个人网页简历（幸锦鸿）初始版本`，共 11 个文件）。
+> 只有在**换电脑、重装系统、或者想重新做一遍**时才需要执行下面的命令。
 
 按顺序执行（一行一行来，不要一次全贴）：
 
@@ -292,6 +297,7 @@ git commit --amend -m "新的提交说明"
 | 弹窗登录后仍提示 `Authentication failed` | 用了账号密码 | 改用浏览器登录或 Personal Access Token |
 | `Support for password authentication was removed` | 同上 | 用 Token 当密码 |
 | Actions 红叉：`Get Pages site failed` | Pages 的 Source 没选 GitHub Actions | 回到第 3 步重新设置 |
+| Actions 红叉：`Resource not accessible by integration`（Create Pages site failed） | 仓库还没开启 Pages，而 `GITHUB_TOKEN` 无权替你创建 Pages 站点 | **必须由仓库所有者手动开启一次**：Settings → Pages → Source 选 `GitHub Actions`。这一步无法自动化 |
 | Actions 红叉：`Resource not accessible by integration` | 权限不足 | 确认 `deploy.yml` 里的 `permissions:` 三行没有被删掉；`Settings → Actions → General → Workflow permissions` 选 `Read and write permissions` |
 | 网站打开是 404 | ① 还没部署完 ② 网址写错 ③ 仓库 Private | 等 2 分钟；核对 `用户名.github.io/仓库名/`；把仓库改成 Public |
 | 网页打开只有文字没有样式 | `css/js/assets` 路径错了或没上传 | 本地确认文件夹层级；`git status` 看是否漏提交（Linux 区分大小写，`CSS/` ≠ `css/`） |
