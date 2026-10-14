@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  个人网页简历 · index.html   —— 幸锦鸿
+  ============================================================
+  页面结构（讲解代码结构时按这个顺序讲）：
+    header 顶部导航（锚点跳转）
+    main
+      #home      首屏：头像 + 姓名 + 一句话介绍 + 联系方式按钮
+      #about     关于我（正文 + 个人信息 + 数字卡片）
+      #education 教育背景（时间线）
+      #skills    专业技能（进度条 + 技能标签）
+      #projects  项目经历（卡片）
+      #practice  实践与校园经历（时间线）
+      #honors    荣誉与自我评价
+      #contact   联系方式（图标卡片）
+    footer 页脚
+
+  ✏️ 改内容：直接改 HTML 里的文字即可，不需要动 JS。
+  ➕ 加项目：搜索“项目卡片模板”，把注释里的 article 复制出来改。
+  ============================================================
+-->
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>幸锦鸿 · 个人简历 | 昇腾 AI 应用</title>
+  <meta name="description" content="幸锦鸿的个人网页简历：广东科学技术职业学院 昇腾 AI 应用专业，计算机运维与 AI 应用方向。" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <!-- 页面滚动进度条 -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- ==================== 顶部导航 ==================== -->
+  <header class="site-header" id="siteHeader">
+    <nav class="nav container">
+      <a href="#home" class="nav__logo">
+        <span class="nav__logo-mark">幸</span>
+        <span class="nav__logo-text">幸锦鸿<em>.resume</em></span>
+      </a>
+
+      <ul class="nav__list" id="navList">
+        <li><a href="#about" class="nav__link">关于我</a></li>
+        <li><a href="#education" class="nav__link">教育背景</a></li>
+        <li><a href="#skills" class="nav__link">专业技能</a></li>
+        <li><a href="#projects" class="nav__link">项目经历</a></li>
+        <li><a href="#practice" class="nav__link">实践经历</a></li>
+        <li><a href="#contact" class="nav__link">联系我</a></li>
+      </ul>
+
+      <div class="nav__actions">
+        <button class="icon-btn" id="themeToggle" type="button" title="切换深浅色主题" aria-label="切换深浅色主题">
+          <span class="icon-btn__sun">☀</span><span class="icon-btn__moon">☾</span>
+        </button>
+        <button class="icon-btn icon-btn--menu" id="menuToggle" type="button" title="展开菜单" aria-label="展开菜单">☰</button>
+        <a class="btn btn--ghost nav__print" href="javascript:window.print()">打印 / 存 PDF</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ==================== 首屏 ==================== -->
+    <section class="hero" id="home">
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="container hero__inner">
+        <div class="hero__avatar">
+          <!-- 想换成真人照片：把照片命名为 avatar.jpg 放进 assets/，再把下面的 src 改成 assets/avatar.jpg -->
+          <img src="assets/avatar.svg" alt="幸锦鸿的头像" width="180" height="180" />
+        </div>
+
+        <div class="hero__text">
+          <p class="hero__hello">👋 你好，我是</p>
+          <h1 class="hero__name">幸锦鸿</h1>
+          <p class="hero__title">
+            <span class="typed" id="typed">昇腾 AI 应用 / 计算机运维</span>
+          </p>
+          <p class="hero__desc">
+            广东科学技术职业学院 <strong>昇腾 AI 应用</strong>专业 2025 级学生。
+            熟悉计算机硬件组装与故障维修，能独立完成系统安装与日常维护；
+            正在学习 AI 应用开发与提示词编写，习惯用 AI 工具辅助完成网页这类小项目。
+          </p>
+
+          <ul class="hero__chips">
+            <li class="chip">📍 广东 · 深圳</li>
+            <li class="chip">🎓 2025 级 · 专科</li>
+            <li class="chip">💼 求职方向：AI 应用 / 计算机运维</li>
+          </ul>
+
+          <div class="hero__buttons">
+            <a class="btn btn--primary" href="#projects">查看我的项目</a>
+            <a class="btn btn--outline" href="https://github.com/kijin666" target="_blank" rel="noopener">GitHub 主页</a>
+            <a class="btn btn--outline" href="mailto:xing_070604@qq.com">联系我</a>
+          </div>
+        </div>
+      </div>
+
+      <a class="hero__scroll" href="#about" aria-label="向下滚动">↓</a>
+    </section>
+
+    <!-- ==================== 关于我 ==================== -->
+    <section class="section" id="about">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="section__eyebrow">ABOUT ME</p>
+          <h2 class="section__title">关于我</h2>
+        </header>
+
+        <div class="about">
+          <div class="about__text reveal">
+            <p>
+              我是幸锦鸿，<strong>广东科学技术职业学院 昇腾 AI 应用</strong>专业 2025 级学生，学号 0120250976。
+              从组装第一台电脑、排查第一块硬盘开始接触计算机，到现在担任计算机协会维修组大组长，
+              负责报修对接，并参与全校学生宿舍与宿管电脑的义务维修。
+            </p>
+            <p>
+              我喜欢「动手把问题解决掉」的过程：电脑点不亮就一层层排查，网页不好看就一遍遍调整。
+              这份网页简历也是如此——先用 AI 辅助生成初稿，再逐行调整页面结构、配色和手机端效果，
+              最后配置成「提交代码就自动发布」，不用手动上传文件。
+            </p>
+            <p>
+              我正在学习 AI 应用开发与提示词编写，希望在 AI 应用 / 计算机运维方向找到实习机会，
+              把动手能力和 AI 工具结合起来，解决更实际的问题。
+            </p>
+
+            <ul class="about__facts">
+              <li><span>姓名</span><strong>幸锦鸿</strong></li>
+              <li><span>学号</span><strong>0120250976</strong></li>
+              <li><span>学校</span><strong>广东科学技术职业学院</strong></li>
+              <li><span>专业</span><strong>昇腾 AI 应用</strong></li>
+              <li><span>班级</span><strong>计算机 2 班</strong></li>
+              <li><span>状态</span><strong class="ok">可实习</strong></li>
+            </ul>
+          </div>
+
+          <aside class="about__stats reveal">
+            <!-- 数字直接写在 HTML 里：即使浏览器禁用 JS，看到的也是真实数据；开启 JS 后会从 0 滚动上去 -->
+            <div class="stat">
+              <strong data-count="2">2</strong>
+              <span>竞赛获奖</span>
+            </div>
+            <div class="stat">
+              <strong data-count="1">1</strong>
+              <span>已上线项目</span>
+            </div>
+            <div class="stat">
+              <strong data-count="5">5</strong>
+              <span>常用技能</span>
+            </div>
+            <div class="stat">
+              <strong data-count="1">1</strong>
+              <span>担任学生职务</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 教育背景 ==================== -->
+    <section class="section section--tint" id="education">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="section__eyebrow">EDUCATION</p>
+          <h2 class="section__title">教育背景</h2>
+        </header>
+
+        <div class="timeline">
+          <article class="timeline__item reveal">
+            <div class="timeline__dot"></div>
+            <div class="timeline__body card">
+              <div class="card__head">
+                <h3>广东科学技术职业学院 · 昇腾 AI 应用（专科）</h3>
+                <span class="tag tag--time">2025.09 - 2028.06</span>
+              </div>
+              <p class="muted">全日制专科 · 计算机 2 班 · 预计 2028 年 6 月毕业</p>
+              <p class="timeline__label">主修课程</p>
+              <p>
+                程序设计基础、计算机组成与硬件维护、计算机网络基础、数据库基础、
+                Web 前端开发、AI 应用基础、人工智能导论。
+              </p>
+              <p class="timeline__label">在校表现</p>
+              <p>
+                获<strong>数学建模竞赛（专科组）国家级二等奖</strong>；
+                担任计算机协会维修组大组长，负责报修对接与义务维修。
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline__item reveal">
+            <div class="timeline__dot"></div>
+            <div class="timeline__body card">
+              <div class="card__head">
+                <h3>自学与实践路线</h3>
+                <span class="tag tag--time">2025.10 - 至今</span>
+              </div>
+              <p class="timeline__label">学习路线</p>
+              <p>
+                计算机硬件组装与故障维修 → Windows 系统安装与维护 → AI 工具与提示词实践 →
+                HTML / CSS 前端基础 → Git 与 GitHub Pages 部署。
+              </p>
+              <p class="timeline__label">学习方式</p>
+              <p>边修边学 + AI 辅助 + 动手复刻，遇到问题先自己排查，再查文档和资料。</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 专业技能 ==================== -->
+    <section class="section" id="skills">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="section__eyebrow">SKILLS</p>
+          <h2 class="section__title">专业技能</h2>
+        </header>
+
+        <div class="skills">
+          <div class="skills__col reveal">
+            <h3 class="skills__col-title">计算机运维与硬件</h3>
+
+            <div class="skill" data-level="90">
+              <div class="skill__top"><span>计算机硬件组装与故障维修</span><em>熟练</em></div>
+              <div class="skill__track"><div class="skill__fill"></div></div>
+            </div>
+
+            <div class="skill" data-level="85">
+              <div class="skill__top"><span>系统安装 / 重装与日常维护</span><em>熟练</em></div>
+              <div class="skill__track"><div class="skill__fill"></div></div>
+            </div>
+
+            <div class="skill" data-level="75">
+              <div class="skill__top"><span>电脑软硬件故障排查</span><em>掌握</em></div>
+              <div class="skill__track"><div class="skill__fill"></div></div>
+            </div>
+
+            <div class="skill" data-level="70">
+              <div class="skill__top"><span>笔记本清灰保养与硬件升级</span><em>掌握</em></div>
+              <div class="skill__track"><div class="skill__fill"></div></div>
+            </div>
+          </div>
+
+          <div class="skills__col reveal">
+            <h3 class="skills__col-title">AI 应用与开发工具</h3>
+
+            <div class="skill" data-level="60">
+              <div class="skill__top"><span>AI 工具使用与提示词编写</span><em>学习中</em></div>
+              <div class="skill__track"><div class="skill__fill"></div></div>
+            </div>
+
+            <div class="skill" data-level="55">
+              <div class="skill__top"><span>HTML / CSS 网页基础</span><em>学习中</em></div>
+              <div class="skill__track"><div class="skill__fill"></div></div>
+            </div>
+
+            <div class="skill" data-level="50">
+              <div class="skill__top"><span>Git / GitHub 基础操作</span><em>学习中</em></div>
+              <div class="skill__track"><div class="skill__fill"></div></div>
+            </div>
+
+            <div class="skill" data-level="45">
+              <div class="skill__top"><span>昇腾 AI 应用开发</span><em>学习中</em></div>
+              <div class="skill__track"><div class="skill__fill"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <ul class="skill-tags reveal">
+          <li>硬件维修</li><li>系统安装</li><li>故障排查</li><li>AI 提示词</li>
+          <li>昇腾 AI</li><li>HTML5</li><li>CSS3</li><li>Git</li>
+          <li>GitHub Pages</li><li>Trae IDE</li><li>Markdown</li><li>团队协作</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ==================== 项目经历 ==================== -->
+    <section class="section section--tint" id="projects">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="section__eyebrow">PROJECTS</p>
+          <h2 class="section__title">项目经历</h2>
+          <p class="section__sub">课程作业项目，源代码和自动部署流程都在我的 GitHub 上。</p>
+        </header>
+
+        <div class="projects">
+          <article class="project card reveal">
+            <div class="project__head">
+              <h3 class="project__title">个人网页简历（课程作业·本项目）</h3>
+              <span class="tag">个人项目</span>
+            </div>
+            <p class="project__desc">
+              用「AI 辅助生成 + 手工调整」的方式完成的响应式网页简历：先写提示词生成初稿，
+              再逐项修改页面结构、配色与手机端表现，最后配置 GitHub Actions 实现提交即自动发布。
+            </p>
+            <ul class="project__points">
+              <li>添加个人形象与信息，按自己的经历重写页面结构与文案</li>
+              <li>调整配色、深浅色主题与手机端布局，保证小屏下文字不溢出</li>
+              <li>编写并反复迭代 AI 提示词，用 AI 辅助写代码、定位样式问题</li>
+              <li>配置 <code>.github/workflows/deploy.yml</code>，<code>push</code> 到 main 分支后自动部署到 GitHub Pages</li>
+            </ul>
+            <ul class="project__stack">
+              <li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>GitHub Pages</li><li>Trae IDE</li>
+            </ul>
+            <div class="project__links">
+              <a href="https://github.com/kijin666/resume-website" target="_blank" rel="noopener">源码 ↗</a>
+              <a href="https://kijin666.github.io/resume-website/" target="_blank" rel="noopener">在线预览 ↗</a>
+            </div>
+          </article>
+
+          <!-- ==================== 项目卡片模板（以后新增项目时复制下面这段） ====================
+          <article class="project card reveal">
+            <div class="project__head">
+              <h3 class="project__title">项目名称</h3>
+              <span class="tag">项目类型（个人项目 / 团队项目 / 课程作业）</span>
+            </div>
+            <p class="project__desc">一句话说清这个项目做了什么、给谁用。</p>
+            <ul class="project__points">
+              <li>你负责的部分，用了什么技术</li>
+              <li>遇到的难点，你是怎么排查解决的</li>
+            </ul>
+            <ul class="project__stack"><li>技术栈1</li><li>技术栈2</li></ul>
+            <div class="project__links">
+              <a href="https://github.com/kijin666" target="_blank" rel="noopener">源码 ↗</a>
+            </div>
+          </article>
+          ================================================================================ -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 实践经历 ==================== -->
+    <section class="section" id="practice">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="section__eyebrow">EXPERIENCE</p>
+          <h2 class="section__title">实践与校园经历</h2>
+        </header>
+
+        <div class="timeline">
+          <article class="timeline__item reveal">
+            <div class="timeline__dot"></div>
+            <div class="timeline__body card">
+              <div class="card__head">
+                <h3>计算机协会 · 维修组大组长</h3>
+                <span class="tag tag--time">在校期间</span>
+              </div>
+              <p>
+                担任维修组大组长，负责 S3、J3 区域的报修对接与人员安排；
+                参与全校学生宿舍与宿管电脑的义务维修，处理系统重装、硬件更换、外设与网络故障等问题。
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline__item reveal">
+            <div class="timeline__dot"></div>
+            <div class="timeline__body card">
+              <div class="card__head">
+                <h3>无畏契约（VALORANT）· 大湾区珠海赛区 第 3 名</h3>
+                <span class="tag tag--time">在校期间</span>
+              </div>
+              <p>
+                与队友组队参加大湾区珠海赛区比赛并获得第 3 名；
+                负责赛前复盘与沟通，也让我体会到配合和执行比个人发挥更重要。
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline__item reveal">
+            <div class="timeline__dot"></div>
+            <div class="timeline__body card">
+              <div class="card__head">
+                <h3>课程作业 · 网页简历与自动部署</h3>
+                <span class="tag tag--time">2026.03</span>
+              </div>
+              <p>
+                完成《前端框架应用开发》课程的网页简历作业：用 AI 辅助 + 手工调整完成页面，
+                用 Git 管理版本并推送到 GitHub，配置 GitHub Actions 实现提交即部署。
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 荣誉与自我评价 ==================== -->
+    <section class="section section--tint" id="honors">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="section__eyebrow">HONORS</p>
+          <h2 class="section__title">荣誉与自我评价</h2>
+        </header>
+
+        <div class="honors">
+          <ul class="honor-list reveal">
+            <li><span class="honor-list__year">国家级</span>数学建模竞赛（专科组）国家二等奖</li>
+            <li><span class="honor-list__year">赛区</span>无畏契约（VALORANT）大湾区珠海赛区 第 3 名</li>
+            <li><span class="honor-list__year">职务</span>计算机协会维修组大组长</li>
+          </ul>
+
+          <blockquote class="quote reveal">
+            <p>
+              “我常开玩笑说自己「勉强算个人」——不是天赋型选手，但交代的事一定会做完。
+              电脑坏了能修，模型跑不动就查，作业该交的时候不会拖。”
+            </p>
+            <footer>—— 自我评价</footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 联系我 ==================== -->
+    <section class="section" id="contact">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="section__eyebrow">CONTACT</p>
+          <h2 class="section__title">联系我</h2>
+          <p class="section__sub">欢迎交流 AI 应用、电脑维修或实习机会，我通常 24 小时内回复。</p>
+        </header>
+
+        <div class="contacts reveal">
+          <a class="contact card" href="mailto:xing_070604@qq.com">
+            <span class="contact__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 7 8.2 5.6a1.5 1.5 0 0 0 1.6 0L21 7"/>
+              </svg>
+            </span>
+            <span class="contact__label">邮箱</span>
+            <strong>xing_070604@qq.com</strong>
+          </a>
+          <a class="contact card" href="tel:13544298511">
+            <span class="contact__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/>
+              </svg>
+            </span>
+            <span class="contact__label">手机</span>
+            <strong>135-4429-8511</strong>
+          </a>
+          <a class="contact card" href="https://github.com/kijin666" target="_blank" rel="noopener">
+            <span class="contact__icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.57 2.34 1.12 2.91.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.35 4.8-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.16 10.16 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/>
+              </svg>
+            </span>
+            <span class="contact__label">GitHub</span>
+            <strong>github.com/kijin666</strong>
+          </a>
+          <div class="contact card">
+            <span class="contact__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.6 9.6 0 0 1-2.8-.4L4 21l1.4-3.9A8.2 8.2 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3a8.4 8.4 0 0 1 9 8.5Z"/>
+                <path d="M8.8 10.6h.01M12 10.6h.01M15.2 10.6h.01"/>
+              </svg>
+            </span>
+            <span class="contact__label">微信</span>
+            <strong>xing070604</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== 页脚 ==================== -->
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p>© <span id="year">2026</span> 幸锦鸿 · 个人网页简历</p>
+      <p class="muted">
+        使用 HTML / CSS / JavaScript 手写 ·
+        <a href="https://github.com/kijin666/resume-website" target="_blank" rel="noopener">查看源码</a>
+      </p>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" type="button" title="回到顶部" aria-label="回到顶部">↑</button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

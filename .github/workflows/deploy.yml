@@ -1,0 +1,53 @@
+# ============================================================
+# GitHub Actions 工作流：把静态网页自动发布到 GitHub Pages
+# 位置必须是 .github/workflows/ 目录，文件名可自定义
+#
+# 触发条件：向 main 分支 push，或在 Actions 页面手动点击 Run workflow
+# 效果：push 完成后约 30 秒，网站自动更新
+# ============================================================
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # 支持在 Actions 页面手动启动（课程 1-5 步「手动启动 actions」）
+
+# 让工作流有权限发布 Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同一时间只跑一个部署任务，避免并发冲突
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  # ---------- 第一步：打包静态文件 ----------
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 拉取仓库代码
+        uses: actions/checkout@v4
+
+      - name: 配置 GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: 上传站点文件（整个仓库根目录就是网站内容）
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  # ---------- 第二步：发布 ----------
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 部署到 GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

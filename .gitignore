@@ -1,0 +1,22 @@
+# ---------- Git 忽略清单 ----------
+# 告诉 Git 哪些文件不需要上传到 GitHub
+
+# 系统 / 编辑器生成的文件
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+
+# 依赖与构建产物（本项目是纯静态页面，暂时用不到，先留着）
+node_modules/
+dist/
+
+# 日志与临时文件
+*.log
+npm-debug.log*
+
+# 本地私密文件（不要上传自己的身份证、成绩单等隐私材料）
+private/
+*.private.*
